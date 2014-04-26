@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Chapapp</string>
+    <string name="map_button">Map</string>
+    <string name="users_button">Users</string>
+    <string name="exit_button">Exit</string>
+    <string name="users_screen">Users Tracked</string>
+    <string name="action_settings">Settings</string>
+    <string name="userScreenSettings_button">Settings</string>
+    <string name="addUsers_Button">Add Users</string>
+    <string name="login_screen">Login</string>
+    <string name="login_Button">Login</string>
+    <string name="add_users_screen">Add Users</string>
+    <string name="Reload">Reload</string>
+    <string name="monitor_screen">Monitor</string>
+	<string name="main_screen">Menu</string>
+</resources>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.-->
+     <!-- This can go anywhere in your layout (see other demos for some examples). -->
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="visible" >
+
+            <Button
+                android:id="@+id/settingsMap_Button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_settings_opacity"
+                android:onClick="onSettingsMapClick"
+                android:padding="5dp"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:id="@+id/subSettings_Layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/settingsMap_Button"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/clearAllCircles_Button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1dp"
+                    android:background="@drawable/button_clear_all_opacity"
+                    android:onClick="showClearAllPopUp"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/circleMap_Button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_toRightOf="@+id/clearAllCircles_Button"
+                    android:background="@drawable/button_poi_opacity"
+                    android:onClick="onCirlceMapClick"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/myCircle_Button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_toRightOf="@+id/circleMap_Button"
+                    android:background="@drawable/me_dis_opacity"
+                    android:onClick="onShowMasterCircleMapClick"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/deleteCircleMap_Button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="70dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/clearAllCircles_Button"
+                    android:layout_marginLeft="1dp"
+                    android:background="@drawable/button_delete_poi_opacity"
+                    android:onClick="onDeleteCircleMapClick"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/radiusButtons_Layout"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/circleMap_Button"
+                    android:layout_marginLeft="1dp"
+                    android:layout_toRightOf="@id/deleteCircleMap_Button" >
+
+                    <Button
+                        android:id="@+id/radiusMinus_Button"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:background="@drawable/button_minus"
+                        android:minWidth="35dp"
+                        android:onClick="decreaseRadius" />
+
+                    <Button
+                        android:id="@+id/radiusPlus_Button"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:background="@drawable/button_plus"
+                        android:minWidth="35dp"
+                        android:onClick="increaseRadius" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/updateDB_Button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/settingsMap_Button"
+                android:background="#ffce00"
+                android:onClick="updateDB"
+                android:text="Update DB"
+                android:textColor="#ff8a00"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pointOfInterestPopUp_Layout"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:background="#00aaaa"
+            android:padding="10dp"
+            android:visibility="invisible" >
+
+            <TextView
+                android:id="@+id/circleName_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:text="Name:"
+                android:textColor="#ffcb00"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/circleName_EditText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/circleName_TextView"
+                android:layout_alignTop="@+id/circleName_TextView"
+                android:layout_marginLeft="1dp"
+                android:layout_toRightOf="@id/circleName_TextView"
+                android:background="#FFFFFF"
+               	android:inputType="textPersonName"
+                android:maxLength="20"
+                >
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/circleDescription_TextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/circleName_TextView"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:text="Description (optional)"
+                android:textColor="#ffcb00"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/circleDescription_EditText"
+                android:layout_width="fill_parent"
+                android:layout_height="90dp"
+                android:layout_below="@id/circleDescription_TextView"
+                android:layout_marginTop="1dp"
+                android:background="#FFFFFF"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:maxLength="20"/>
+
+            <Button
+                android:id="@+id/circleNameCancel_Button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/circleDescription_EditText"
+                android:background="#AAAAAA"
+                android:onClick="cancel"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/circleNameOK_Button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="95dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/circleDescription_EditText"
+                android:layout_toRightOf="@id/circleNameCancel_Button"
+                android:background="#AAAAAA"
+                android:onClick="addCircleToAMap"
+                android:text="OK" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/clearAllPopUp_Layout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#00aaaa"
+            android:visibility="visible" >
+
+            <TextView
+                android:id="@+id/clearAllCircles_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Are you sure you want to clear all?"
+                android:textColor="#ffcb00"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/clearAllCirclesCancel_Button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/clearAllCircles_TextView"
+                android:background="#AAAAAA"
+                android:onClick="cancel"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/clearAlCircleslOK_Button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/clearAllCircles_TextView"
+                android:layout_toRightOf="@+id/clearAllCirclesCancel_Button"
+                android:background="#AAAAAA"
+                android:onClick="clearAllCircles"
+                android:text="Clear all" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sendMsg_Layout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#00aaaa"
+            android:padding="5dp"
+            android:visibility="invisible" >
+
+            <TextView
+                android:id="@+id/sendMsgTo_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Send Message To"
+                android:textColor="#ffcb00"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/sendMsgToUserName_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sendMsgTo_TextView"
+                android:layout_centerHorizontal="true"
+                android:text="user name"
+                android:textColor="#ffcb00"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/sendMsgTo_EditText"
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/sendMsgToUserName_TextView"
+                android:gravity="center_vertical|top"
+                android:inputType="textMultiLine" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sendMsgTo_EditText" >
+
+                <Button
+                    android:id="@+id/sendMsgCancel_Button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="cancel2"
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/sendMsgSend_Button"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="sendMsgTo"
+                    android:text="Send" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/alertPopUp_Layout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#ff3535"
+            android:padding="5dp"
+            android:visibility="invisible" >
+
+            <TextView
+                android:id="@+id/alert_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="ALERT"
+                android:textColor="#ffcb00"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/numOfUsersOutsideTheRange_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/alert_TextView"
+                android:layout_centerHorizontal="true"
+                android:text="Users out of range: #"
+                android:textColor="#ffcb00"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/alertDismiss_Button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/numOfUsersOutsideTheRange_TextView"
+                android:layout_weight="1"
+                android:onClick="dismissAlert"
+                android:text="Dismiss" />
+        </RelativeLayout>
+    </RelativeLayout>

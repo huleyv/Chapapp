@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/userName_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:maxLength="10"
+        android:maxLines="1"
+        android:text="UserName"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="100dp" />
+
+    <ImageView
+        android:id="@+id/userAdd_ImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/plus_sign" />
+
+    <TextView
+        android:id="@+id/userMACAddress_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="false"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/userName_TextView"
+        android:text="MAC address"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
